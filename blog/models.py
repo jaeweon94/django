@@ -25,5 +25,8 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True) #auto_now_add 최초에만
     updated_at = models.DateTimeField(auto_now=True) #auto_now 업데이트할때마다
 
-    def __str__(self):
+    class Meta:
+        ordering = ['-id'] #필드수는 1~2개만 쓰는게 성능 높이는데 좋음
+
+    def __str__(self): #포스트에 글들이 다 Post object로 나오는데 title로 바꾸기 위함
         return self.title
