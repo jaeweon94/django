@@ -12,6 +12,14 @@
 
 <p>아니 그게 아니라...</p>
 
+<ul>
+{% for post in post_list %}
+    <li>
+        {{ post.id }}
+        {{ post.title }}
+    </li>
+{% endfor %}
+</ul>
 
 </body>
 </html>
