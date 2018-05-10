@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.forms import ValidationError
+from django.core.urlresolvers import reverse
 import re
 
 
@@ -34,6 +35,9 @@ class Post(models.Model):
 
     def __str__(self): #포스트에 글들이 다 Post object로 나오는데 title로 바꾸기 위함
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('blog:post_detail', args=[self.id])
 
 
 class Ask(models.Model):
