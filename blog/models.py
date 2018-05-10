@@ -43,7 +43,6 @@ class Ask(models.Model):
         return self.title
 
 
-
 class Comment(models.Model):
     post = models.ForeignKey(Post)
     author = models.CharField(max_length=20)
