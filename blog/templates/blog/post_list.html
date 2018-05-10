@@ -18,14 +18,25 @@
     <input type="submit" value="검색" />
 </form>
 
+
 <ul>
 {% for post in post_list %}
     <li>
         {{ post.id }}
+        <a href="/blog/{{ post.id }}">
         {{ post.title }}
+        </a>
     </li>
 {% endfor %}
 </ul>
+
+<p>찾으시는 문서가 없으신가요?</p>
+<p>원하시는 문서를 신청해보세요! 신청 후 문서가 업로드되면 1000P를 드립니다! </p>
+
+<form>
+    <input type="text" name="f"/>
+    <input type="submit" value="신청하기"/>
+</form>
 
 </body>
 </html>
