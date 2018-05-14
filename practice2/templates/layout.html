@@ -1,3 +1,8 @@
+{% load bootstrap3 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +14,20 @@
 <body>
 
 <h1>AskDjango</h1>
+
+
+
+
+{% if messages %}
+    <div class="container">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+            {{ message.tag }} <!-- 메세지 level -->
+            {{ message.message }} <!-- 실제 메세지 내용 -->
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
 
 {% block content %}
 {% endblock %}

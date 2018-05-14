@@ -1,8 +1,92 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import JsonResponse, HttpResponse
 from django.conf import settings
 import os
+from .forms import PostForm, ServerForm
+from .models import Post, GameUser
 # Create your views here.
+
+def server_new(request):
+    if request.method == "POST":
+        form = ServerForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            server = form.save()
+
+            redirect('/blog')
+    else:
+        form = ServerForm()
+
+    return render(request, 'dojo/server_new.html', {
+            'form': form
+        })
+
+def server_edit(request, id):
+
+    server = get_object_or_404(GameUser, id=id)
+
+    if request.method == "POST":
+        form = ServerForm(request.POST, request.FILES, instance=server)
+
+        if form.is_valid():
+            server = form.save()
+
+            redirect('/blog')
+    else:
+        form = ServerForm(instance=server)
+
+    return render(request, 'dojo/server_new.html', {
+            'form': form
+        })
+
+
+
+def post_new(request):
+    if request.method =='POST':
+        form = PostForm(request.POST,request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.ip = request.META['REMOTE_ADDR']
+            post.save()
+
+            return redirect('/dojo')
+
+            #post = Post()
+            #post.title = form.cleaned_data['title']
+            #post.content = form.cleaned_data['content']
+            #post.save()
+
+            #post = Post(title=form.cleaend_data['title'],
+            #            content = form.cleaned_data['content'])
+            #post.save()
+
+            #post = Post.objects.create(title=form.cleaned_data['title'], content = form.#cleaned_data['content'])
+
+    else:
+        form = PostForm()
+    return render(request, 'dojo/post_form.html', {
+            'form': form,
+        })
+
+def post_edit(request, id):
+    post = get_object_or_404(Post, id=id)
+
+    if request.method =='POST':
+        form = PostForm(request.POST,request.FILES, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.ip = request.META['REMOTE_ADDR']
+            post.save()
+
+            return redirect('/dojo')
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'dojo/post_form.html', {
+            'form': form,
+        })
+    pass
+
+
 
 def mysum(request, x, y=0): #url의 x와 맞춰야함 k는 안됨
     return HttpResponse(int(x) + int(y) +100)

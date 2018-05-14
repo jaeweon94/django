@@ -4,6 +4,16 @@ from . import views
 from . import views_cbv
 
 urlpatterns = [
+
+    url(r'^new/$', views.post_new, name='post_new'),
+    url(r'^(?P<id>\d+)/edit/$', views.post_edit),
+
+
+    url(r'^server/$', views.server_new, name='server_new'),
+    url(r'^(?P<id>\d+)/edit/$', views.server_edit, name='server_edit'),
+
+
+
     url(r'^sum/(?P<x>\d+)/$',views.mysum),
     url(r'^sum/(?P<x>\d+)/(?P<y>\d+)/$',views.mysum),
     url(r'^hello/(?P<name>[ㄱ-힣]+)/(?P<age>\d+)/$', views.name),
