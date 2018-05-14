@@ -21,6 +21,9 @@ class Post(models.Model):
     #author = models.CharField(max_length=20)
     title = models.CharField(max_length=100, verbose_name='제목', help_text='포스팅 제목을 입력해주세요. 최대 100자 내외')
     content = models.TextField(verbose_name='내용')
+
+    photo = models.ImageField(blank=True)
+
     tags = models.CharField(max_length=100, blank=True)
     lnglat = models.CharField(max_length=50, blank=True, help_text='경도/위도 포맷으로 입력', validators=[lnglat_validator])
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
@@ -37,7 +40,7 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blog:post_detail', args=[self.id])
+        return reverse('blog:post_detail', args=[self.id]) ## /blog/detail/4
 
 
 class Ask(models.Model):

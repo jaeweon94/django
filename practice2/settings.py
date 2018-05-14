@@ -129,5 +129,20 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'practice2', 'static'),
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 INTERNAL_IPS = ['127.0.0.1']
+
+
+from django.contrib.messages import constants
+
+MESSAGE_LEVEL = constants.DEBUG # 지금부터 debug 레벨의 메세지를 남길 수 있음
+
+MESSAGE_TAGS = {constants.ERROR: 'danger'}
